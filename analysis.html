@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PathFinder Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #ede7f6, #e1bee7);
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #4f46e5;
+    }
+    .answers, .insight {
+      margin-top: 1.5rem;
+    }
+    .answers ul, .insight ul {
+      padding-left: 20px;
+    }
+    .back-button {
+      margin-top: 2rem;
+      display: block;
+      text-align: center;
+    }
+    .back-button a {
+      text-decoration: none;
+      color: white;
+      background: #4f46e5;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .back-button a:hover {
+      background-color: #4338ca;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Career Analysis</h1>
+    <div id="suggestion"></div>
+
+    <div class="answers">
+      <h2>Your Answers</h2>
+      <ul id="answerList"></ul>
+    </div>
+
+    <div class="insight">
+      <h2>Why This Suggestion?</h2>
+      <ul id="insightList"></ul>
+    </div>
+
+    <div class="back-button">
+      <a href="index.html">← Take Quiz Again</a>
+    </div>
+  </div>
+
+  <script>
+    const match = JSON.parse(sessionStorage.getItem("match"));
+    const answers = JSON.parse(sessionStorage.getItem("answers"));
+
+    const suggestionBox = document.getElementById("suggestion");
+    const answerList = document.getElementById("answerList");
+    const insightList = document.getElementById("insightList");
+
+    if (match && answers) {
+      suggestionBox.innerHTML = `<h2>Suggested Course: ${match.course}</h2><h3>Career Path: ${match.career}</h3>`;
+
+      answers.forEach((answer, index) => {
+        answerList.innerHTML += `<li>Q${index + 1}: <strong>${answer}</strong></li>`;
+      });
+
+      // Display reasons (based on best-matching answers)
+      match.answers.forEach((matchAns, index) => {
+        if (matchAns === answers[index]) {
+          insightList.innerHTML += `<li>Answer to Q${index + 1} aligned well with this course.</li>`;
+        }
+      });
+    } else {
+      suggestionBox.innerHTML = "<p>No match found. Please try again from the quiz page.</p>";
+    }
+  </script>
+</body>
+</html>
+        

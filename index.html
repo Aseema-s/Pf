@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PathFinder - Career Guidance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="data.js" rel="script">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #e0f2f1);
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #374151;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      font-weight: 600;
+      color: #1f2937;
+    }
+    select, button {
+      display: block;
+      margin-top: 10px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: 600;
+    }
+    button:hover {
+      background-color: #4338ca;
+    }
+    .hidden {
+      display: none;
+    }
+    .result {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .result p {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PathFinder</h1>
+    <form id="quizForm">
+      <div class="question">
+        <label>Q1: Which stream did you prefer most in school?</label>
+        <select name="Q1">
+          <option value="Science">Science</option>
+          <option value="Commerce">Commerce</option>
+          <option value="Arts">Arts</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q2: What type of work excites you?</label>
+        <select name="Q2">
+          <option value="Research">Research</option>
+          <option value="Creative">Creative</option>
+          <option value="Business">Business</option>
+          <option value="Tech">Tech</option>
+          <option value="Social">Social</option>
+          <option value="Analysis">Analysis</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q3: Do you enjoy solving problems?</label>
+        <select name="Q3">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q4: Do you prefer working alone or in teams?</label>
+        <select name="Q4">
+          <option value="Alone">Alone</option>
+          <option value="Group">Group</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q5: Do you like theoretical concepts?</label>
+        <select name="Q5">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q6: What subject do you enjoy most?</label>
+        <select name="Q6">
+          <option value="Maths">Maths</option>
+          <option value="Biology">Biology</option>
+          <option value="History">History</option>
+          <option value="Accounts">Accounts</option>
+          <option value="Drawing">Drawing</option>
+          <option value="Writing">Writing</option>
+          <option value="Finance">Finance</option>
+          <option value="Debate">Debate</option>
+          <option value="Programming">Programming</option>
+          <option value="Health">Health</option>
+          <option value="Leadership">Leadership</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q7: Are you comfortable with abstract thinking?</label>
+        <select name="Q7">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q8: Which skill best describes you?</label>
+        <select name="Q8">
+          <option value="Logic">Logic</option>
+          <option value="Imagination">Imagination</option>
+          <option value="Structure">Structure</option>
+          <option value="Communication">Communication</option>
+          <option value="Focus">Focus</option>
+          <option value="Creativity">Creativity</option>
+          <option value="Empathy">Empathy</option>
+          <option value="Problem Solving">Problem Solving</option>
+          <option value="Money">Money</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q9: What’s your favorite subject area?</label>
+        <select name="Q9">
+          <option value="Chemistry">Chemistry</option>
+          <option value="Economics">Economics</option>
+          <option value="Visuals">Visuals</option>
+          <option value="Politics">Politics</option>
+          <option value="Physics">Physics</option>
+          <option value="Biology">Biology</option>
+          <option value="Marketing">Marketing</option>
+          <option value="History">History</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Q10: What motivates you most?</label>
+        <select name="Q10">
+          <option value="Innovate">Innovate</option>
+          <option value="Discover">Discover</option>
+          <option value="Persuade">Persuade</option>
+          <option value="Build">Build</option>
+          <option value="Express">Express</option>
+          <option value="Care">Care</option>
+          <option value="Pitch">Pitch</option>
+          <option value="Strategy">Strategy</option>
+          <option value="Calculate">Calculate</option>
+          <option value="Imagine">Imagine</option>
+        </select>
+      </div>
+      <button type="submit">Get Course Suggestion</button>
+    </form>
+
+    <div class="result hidden" id="resultBox">
+      <h2>Suggested Course & Career</h2>
+      <p id="courseCareer"></p>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const formData = new FormData(this);
+      const answers = Array.from(formData.values());
+  
+      if (answers.includes("") || answers.length !== 10) {
+        alert("Please answer all questions before submitting.");
+        return;
+      }
+  
+      function getMatchScore(inputAnswers, dataAnswers) {
+        return inputAnswers.reduce((score, answer, index) => {
+          return score + (answer === dataAnswers[index] ? 1 : 0);
+        }, 0);
+      }
+  
+      let bestMatch = null;
+      let bestScore = 0;
+  
+      data.forEach(entry => {
+        const score = getMatchScore(answers, entry.answers);
+        if (score > bestScore) {
+          bestScore = score;
+          bestMatch = entry;
+        }
+      });
+  
+      if (bestMatch) {
+        sessionStorage.setItem("match", JSON.stringify(bestMatch));
+        sessionStorage.setItem("answers", JSON.stringify(answers));
+      }
+  
+      window.location.href = "analysis.html";
+    });
+  </script>
+  
+
+</body>
+</html>
