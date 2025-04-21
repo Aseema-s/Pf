@@ -38,7 +38,7 @@ const data = [
   },
   {
     answers: ["Science", "Research", "Yes", "Alone", "Yes", "Maths", "Yes", "Logic", "Physics", "Strategy"],
-    course: "B.Sc in Physics",
+    course: "B.E Computer Science",
     career: "Data Scientist"
   },
   {
