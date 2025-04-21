@@ -1,5 +1,3 @@
-// data.js - Contains realistic and meaningful course & career suggestions
-
 const data = [
   {
     answers: ["Science", "Research", "Yes", "Alone", "Yes", "Biology", "Yes", "Focus", "Chemistry", "Discover"],
